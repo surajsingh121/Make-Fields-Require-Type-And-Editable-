@@ -1,0 +1,6 @@
+/* Position the pencil icon next to the editable fields */
+.editable-icon {
+    cursor: pointer; /* Show pointer cursor on pencil icon */
+    margin-left: 8px; /* Space between the field and the pencil icon */
+    vertical-align: middle; /* Align the icon with the middle of the input field */
+}

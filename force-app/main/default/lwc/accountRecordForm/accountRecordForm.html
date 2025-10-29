@@ -1,0 +1,73 @@
+<template>
+    <lightning-card title="Account Form">
+        <div class="slds-m-around_medium">
+            <lightning-input 
+                label="Enter Account ID" 
+                value={accountId} 
+                onchange={handleAccountIdChange}>
+            </lightning-input>
+        </div>
+
+        <!-- Show form only if accountId is provided -->
+        <template if:true={accountId}>
+            <template if:true={account.data}>
+                <lightning-record-edit-form 
+                    object-api-name="Account" 
+                    record-id={accountId}
+                    onsuccess={handleSaveSuccess}>
+
+                    <lightning-messages></lightning-messages>
+
+                    <!-- Account Fields -->
+                    <lightning-input-field field-name="Name" disabled={isReadOnly}></lightning-input-field>
+                    <lightning-input-field field-name="Phone" disabled={isReadOnly}></lightning-input-field>
+                    <lightning-input-field field-name="Description" disabled={isReadOnly}></lightning-input-field>
+                    <lightning-input-field field-name="Industry" disabled={isReadOnly}></lightning-input-field>
+                    <lightning-input-field field-name="Website" disabled={isReadOnly}></lightning-input-field>
+
+                    <!-- Action Buttons -->
+                    <div class="slds-m-top_medium">
+
+                        <!-- Always visible Edit button -->
+                        <lightning-button 
+                            variant="brand-outline" 
+                            label="Edit" 
+                            onclick={handleEdit}
+                            disabled={isEditDisabled}> <!-- disable when Active__c != Yes -->
+                        </lightning-button>
+
+                        <!-- Show Save & Cancel when editing -->
+                        <template if:true={isEditing}>
+                            <lightning-button 
+                                variant="brand" 
+                                type="submit" 
+                                label="Save" 
+                                class="slds-m-left_small">
+                            </lightning-button>
+                            <lightning-button 
+                                variant="neutral" 
+                                label="Cancel" 
+                                onclick={handleCancel}
+                                class="slds-m-left_small">
+                            </lightning-button>
+                        </template>
+                    </div>
+
+                </lightning-record-edit-form>
+            </template>
+
+            <template if:true={account.error}>
+                <p class="slds-text-color_error slds-m-around_medium">
+                    Error loading record. Check Account ID.
+                </p>
+            </template>
+        </template>
+
+        <!-- Message when no Account ID is entered -->
+        <template if:false={accountId}>
+            <p class="slds-m-around_medium">
+                Please enter an Account ID to load the record.
+            </p>
+        </template>
+    </lightning-card>
+</template>
