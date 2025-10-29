@@ -17,6 +17,7 @@ export default class AccountRecordForm extends LightningElement {
 
     // Handle input for Account Id
     handleAccountIdChange(event) {
+        console.log('Account Id input changed');
         this.accountId = event.target.value.trim();
     }
 
