@@ -39,6 +39,7 @@ export default class AccountRecordForm extends LightningElement {
 
     // When Edit button clicked
     handleEdit() {
+        console.log('Edit button clicked',this.isEditDisabled);
         if (!this.isEditDisabled) {
             this.isReadOnly = false;
             this.isEditing = true;
